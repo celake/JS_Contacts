@@ -1,0 +1,15 @@
+{
+  "name": "js_contacts",
+  "version": "1.0.0",
+  "description": "A streamlined contact management application featuring a Node.js and Express.js backend, designed with RESTful API architecture. It supports full CRUD operations and utilizes a MongoDB database for efficient data storage. The frontend is built with Vanilla JavaScript for a fast, responsive user experience.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0"
+  }
+}
