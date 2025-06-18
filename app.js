@@ -1,9 +1,9 @@
-const Express = require('express');
+const express = require('express');
 const mongoose = require('mongoose'); 
+const ejsMate = require('ejs-mate');
+const path = require('path');
 
-
-
-const app = Express();
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 //Database Connection
@@ -19,12 +19,18 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/contactsJS');  
 }
 
+app.engine('ejs', ejsMate);
+app.set("views", path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/contacts', (req, res) => {
-    res.send("All contacts!");
+    res.render('index')
 })
 
 app.get('/contacts/new', (req, res) => {
-    res.send("Create new contact form!");
+    res.render('contacts/new')
 })
 
 app.post('/contacts', (req, res) => {
@@ -32,7 +38,7 @@ app.post('/contacts', (req, res) => {
 })
 
 app.get('/contacts/:id/edit', (req, res) => {
-    res.send("Contact edit form!");
+    res.render('contacts/edit')
 })
 
 app.put('/contacts/:id', (req, res) => {
@@ -40,7 +46,7 @@ app.put('/contacts/:id', (req, res) => {
 })
 
 app.get('/contacts/:id', (req, res) => {
-    res.send("Contact Detail!");
+    res.render('contacts/show');
 })
 
 app.delete('/contacts/:id', (req, res) => {
@@ -48,7 +54,7 @@ app.delete('/contacts/:id', (req, res) => {
 })
 
 app.get('/groups', (req, res) => {
-    res.send("Edit Group Form");
+    res.render('groups/index')
 })
 
 app.post('/groups', (req, res) => {
