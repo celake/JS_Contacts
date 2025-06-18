@@ -1,20 +1,22 @@
 <% layout('layouts/boilerplate.ejs') %>
 <header>
     <div class="name-wrapper">
-        <div class="letter">A</div>
-        <h2 class="contact-name">Annie Atkins</h2>
+        <div class="letter"><%= contact.firstName[0].toUpperCase() %></div>
+        <h2 class="contact-name"><%= contact.firstName %> <%= contact.lastName %></h2>
     </div>
     <a class="small-link">edit </phone></a>
 </header>
 <div class="flash on">New Group Added</div>
 <section class="info-card">
-    <div class="info"><div>Email</div><a class="info-link" href="mailto:charlake@yahoo.com">email@example.com</a></div>
-    <div class="info"><div>Phone</div><a class="info-link" href="15553331212">+1 555 333 1212</a></div>
+    <div class="info"><div>Email</div><a class="info-link" href="mailto:charlake@yahoo.com"><%= contact.email %></a></div>
+    <div class="info"><div>Phone</div><a class="info-link" href="15553331212"><%= contact.phone %></a></div>
     <div class="groups">
-        <div class="group-title info"><span>Group</span><a href="#">+</a></div>
-        <div class="group-tags">
-            <div class="tag"><div class="circle"></div>Family</div>
-        </div>
+        <div class="group-title info"><span>Groups:</span><a href="#">+</a></div>
+        <% for (let group of contact.groups) { %>
+            <div class="group-tags">
+                <div class="tag"><div class="circle"></div><%= group.name %></div>
+            </div>
+        <% } %> 
     </div>
 </section>
 <div class="rt">

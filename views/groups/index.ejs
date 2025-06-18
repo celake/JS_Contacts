@@ -14,13 +14,11 @@
             <div class="groups">
                 <div class="group-title info"><span>Groups</span><a href="#">+</a></div>
                     <div class="group-tags">
-                        <div class="tag">
-                            <label for="work"><input type="checkbox" id="work">Work</label>
-                        </div>
-                        <div class="tag">
-                            <input type="checkbox" id="friends"><label for="friends">Friends</label>
-                        </div>
-                    </div>
+                        <% for (let group of groups) { %>
+                            <div class="tag">
+                                <label for="<%= group.name %>"><input type="checkbox" id="<%= group.name %>"><%= group.name %></label>
+                            </div>
+                        <% } %>
                 </div>
            </form>
            <div class="button-section">

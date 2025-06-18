@@ -9,29 +9,28 @@
             <form id="edit-form">
                 <div class="form-field info">
                     <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName">
+                    <input type="text" name="firstName" id="firstName" value="<%= contact.firstName %>">
                 </div>
                 <div class="form-field info">
                     <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" id="lastName">
+                    <input type="text" name="lastName" id="lastName" value="<%= contact.lastName %>">
                 </div>
                 <div class="form-field info">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" value="<%= contact.email %>">
                 </div>
                 <div class="form-field info">
                     <label for="phone">Phone</label>
-                    <input type="tel" name="phone" id="phone">
+                    <input type="tel" name="phone" id="phone" value="<%= contact.phone %>">
                 </div>
                 <div class="groups form-groups">
                     <div class="group-title info"><span>Groups</span><a href="#">+</a></div>
                     <div class="group-tags">
-                        <div class="tag">
-                            <input type="checkbox" id="'checkbox"><label for="checkbox">Work</label>
-                        </div>
-                        <div class="tag">
-                            <input type="checkbox" id="'checkbox"><label for="checkbox">Friends</label>
-                        </div>
+                        <% for (let group of groups) { %>
+                            <div class="tag">
+                                <label for="<%= group.name %>"><input type="checkbox" id="<%= group.name %>"><%= group.name %></label>
+                            </div>
+                        <% } %>
                     </div>
                 </div> 
             </form>

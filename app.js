@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose'); 
 const ejsMate = require('ejs-mate');
 const path = require('path');
-
+const Contact = require('./models/contacts');
+const Group = require('./models/groups')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,42 +20,55 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/contactsJS');  
 }
 
+// Set up templating
 app.engine('ejs', ejsMate);
 app.set("views", path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); //set path to static files
+app.use(express.urlencoded({extended: true})); //parse req.body 
 
-app.get('/contacts', (req, res) => {
-    res.render('index')
+app.get('/contacts', async (req, res, next) => {
+    const contacts =  await Contact.find({});
+    const groups =  await Group.find({});
+    res.render('index', { contacts, groups });
 })
 
-app.get('/contacts/new', (req, res) => {
-    res.render('contacts/new')
+app.get('/contacts/new', async(req, res, ) => {
+    const groups =  await Group.find({});
+    res.render('contacts/new', {groups});
 })
 
 app.post('/contacts', (req, res) => {
     res.send("Submity new contact form");
 })
 
-app.get('/contacts/:id/edit', (req, res) => {
-    res.render('contacts/edit')
+app.get('/contacts/:id/edit', async (req, res, next) => {
+    const { id } = req.params;
+    const groups =  await Group.find({});
+    const contact = await Contact.findById(id).populate('groups');
+    res.render('contacts/edit', { contact, groups });
 })
 
 app.put('/contacts/:id', (req, res) => {
+
     res.send("Submit edit form!");
 })
 
-app.get('/contacts/:id', (req, res) => {
-    res.render('contacts/show');
+app.get('/contacts/:id',async(req, res, next) => {
+    const { id } = req.params;
+    const contact = await Contact.findById(id).populate('groups');
+    console.log(contact);
+    res.render('contacts/show', {contact});
 })
 
 app.delete('/contacts/:id', (req, res) => {
     res.send("Delete Contact!");
 })
 
-app.get('/groups', (req, res) => {
-    res.render('groups/index')
+app.get('/groups', async (req, res, next) => {
+    const groups =  await Group.find({});
+    res.render('groups/index', {groups});
 })
 
 app.post('/groups', (req, res) => {
