@@ -14,7 +14,12 @@
             <% for (let contact of contacts) { %> 
             <div class="name-wrapper list not-selected">
                 <div class="letter"><%= contact.firstName[0].toUpperCase() %></div>
-                <h2 class="contact-name"><%= contact.firstName %> <%= contact.lastName %></h2>
+                <h2 class="contact-name"><a class="contact-link" href="/contacts/<%= contact._id %>"><%= contact.firstName %> <%= contact.lastName %></a></h2>
             </div>
             <% } %>
         </section>
+        <div class="rt">
+            <form action="/contacts/new">
+                <button type="submit" class="btn">Add New</button>
+            </form>  
+        </div>

@@ -6,13 +6,13 @@
         </header>
         <div class="flash on">Group Name cannot be empty</div>
         <section class="info-card">
-           <form id="group-form">
+           <form id="group-form" method="post" action="/groups">
             <div class="form-field info">
                 <label for="group">New Group Name: </label>
                 <input type="text" name="group" id="group">
             </div>
             <div class="groups">
-                <div class="group-title info"><span>Groups</span><a href="#">+</a></div>
+                <div class="group-title info"><span>Groups</span></div>
                     <div class="group-tags">
                         <% for (let group of groups) { %>
                             <div class="tag">
@@ -20,9 +20,12 @@
                             </div>
                         <% } %>
                 </div>
+                <input type="hidden" value="<%= returnTo %>" name="returnTo" />
            </form>
            <div class="button-section">
                 <button form="group-form" class="btn">Save</button>
-                <button class="btn">Cancel</button>
+                <form action="">
+                    <button type="submit" class="btn">Cancel</button>
+                </form>
             </div> 
         </section>
