@@ -96,9 +96,17 @@ app.get('/groups', async (req, res, next) => {
     res.render('groups/index', {groups, returnTo});
 })
 
-app.post('/groups', (req, res) => {
-    const { returnTo } = req.body;
-    res.redirect(returnTo)
+app.post('/groups', async (req, res,  next) => {
+    const { returnTo, group } = req.body;
+    const newGroup = new Group({name: group});
+    console.log(newGroup)
+    await newGroup.save();
+    if (returnTo) {
+        res.redirect(returnTo);
+    } else {
+        res.redirect('contacts')
+    }
+    
 })
 
 // Open server connection
