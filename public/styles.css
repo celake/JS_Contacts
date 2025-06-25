@@ -104,6 +104,15 @@ select {
     padding-left: 4px;
 }
 
+.contact-link {
+    color: #161A26;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    color: #586a9a;
+}
+
 .small-link {
     color: darkgray;
     font-size: .67rem
@@ -163,12 +172,12 @@ select {
 }
 
 /* Form Styles */ 
-
+ 
 .tag {
-    color: #161A26;
+    color: rgb(160, 167, 195);
     font-size: .75rem;
     height: 32px;
-    border: 1px solid rgba(185, 188, 205, 0.24);
+    border: 1px solid rgb(191, 199, 232);
     border-radius: 14px;
     max-width: 140px;
     padding: 4px 16px 4px 16px;
@@ -179,9 +188,10 @@ select {
     
 }
 
-/* .checked {
-
-} */
+.checked {
+    color: rgb(90, 94, 110);
+    border-color: #161A26;
+}
 
 .btn {
     color: #888EA5;
