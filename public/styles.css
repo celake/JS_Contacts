@@ -227,6 +227,7 @@ input[type='checkbox'] {
 .group-tags {
     display: flex;
     justify-content: start;
+    flex-wrap: wrap;
 }
 
 #group-form {
