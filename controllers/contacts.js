@@ -2,6 +2,7 @@ const Contact = require('../models/contacts');
 const Group = require('../models/groups');
 
 
+
 module.exports.index = async (req, res, next) => {
     const contacts =  await Contact.find({});
     const groups =  await Group.find({});
@@ -28,8 +29,11 @@ module.exports.renderEdit = async (req, res, next) => {
     res.render('contacts/edit', { contact, groups, returnTo });
 }
 
-module.exports.submitEdit = (req, res) => {
-    res.send("Submit edit form!");
+module.exports.submitEdit = async (req, res, next) => {
+    const {id} = req.params;
+    console.log(req.body)
+    const contact = await Contact.findByIdAndUpdate(id, {...req.body})    
+    res.redirect(`/contacts/${id}`);
 }
 
 module.exports.renderDetails = async(req, res, next) => {
