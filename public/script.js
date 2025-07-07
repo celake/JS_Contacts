@@ -3,17 +3,18 @@
     // find label that was clicked
     // add class 'checked' to that label
 
-const group = document.querySelector('.group-tags');
+const tags = document.querySelectorAll('.tag');
 
-group.addEventListener("click", (e) => {
-    const label = e.target.closest('label');
-    if (label && group.contains(label)) {
-        e.preventDefault();
-        const checkbox = label.querySelector('input[type="checkbox"]');
-        if (checkbox) {
-            checkbox.checked = !checkbox.checked;
-            label.classList.toggle('checked', checkbox.checked);
-        }
+tags.forEach(tag => {
+    const checkbox = tag.querySelector('input[type="checkbox"]');
+    console.log(checkbox.value)
+    console.log(checkbox.checked);
+    
+    if (checkbox.checked) {
+        tag.classList.add('checked');
     }
-    console.log(label);
+
+    checkbox.addEventListener("change", () => {  
+        tag.classList.toggle('checked', checkbox.checked);
+    })
 })

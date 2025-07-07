@@ -28,7 +28,10 @@
                     <div class="group-tags">
                         <% for (let group of groups) { %>
                             <div class="tag">
-                                <label for="<%= group.name %>"><input type="checkbox" id="<%= group.name %>" name="groups" value="<%= group._id %>" ><%= group.name %></label>
+                                <label for="<%= group.name %>">
+                                    <input type="checkbox" id="<%= group.name %>" name="groups" value="<%= group._id %>" <% if (names.includes(group.name)) { %> checked <% }%>>
+                                    <%= group.name %>
+                                </label>
                             </div>
                         <% } %>
                     </div>
@@ -40,4 +43,4 @@
                     <button type="submit" class="btn">Cancel</button>
                 </form>
             </div> 
-        </section>
+        </section>    

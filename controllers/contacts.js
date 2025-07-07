@@ -1,8 +1,6 @@
 const Contact = require('../models/contacts');
 const Group = require('../models/groups');
 
-
-
 module.exports.index = async (req, res, next) => {
     const contacts =  await Contact.find({});
     const groups =  await Group.find({});
@@ -16,9 +14,14 @@ module.exports.renderCreateNew = async(req, res, ) => {
     res.render('contacts/new', { groups, currentUrl, returnTo});
 }
 
-
-module.exports.submitCreateNew = (req, res) => {
-    res.send("Submity new contact form");
+module.exports.submitCreateNew = async (req, res, next) => {
+    const contact = new Contact(req.body);
+    let { groups } = req.body;
+    if (!groups) { groups = [] }
+    if (!Array.isArray(groups)) { groups = [groups]}
+    contact.groups = groups;
+    await contact.save();
+    res.redirect('/contacts');
 }
 
 module.exports.renderEdit = async (req, res, next) => {
@@ -26,13 +29,19 @@ module.exports.renderEdit = async (req, res, next) => {
     const returnTo = `contacts/${id}/edit`
     const groups =  await Group.find({});
     const contact = await Contact.findById(id).populate('groups');
-    res.render('contacts/edit', { contact, groups, returnTo });
+    const names = contact.groups.map(group => group.name);
+    res.render('contacts/edit', { contact, groups, returnTo, names});
 }
 
 module.exports.submitEdit = async (req, res, next) => {
     const {id} = req.params;
-    console.log(req.body)
-    const contact = await Contact.findByIdAndUpdate(id, {...req.body})    
+    let  {groups} = req.body;
+    console.log("Groups in body before: ",  req.body.groups)
+    if (!groups) { groups = [] }
+    if (!Array.isArray(groups)) { req.body.groups = [groups]}
+    console.log("Groups in body after: ",  groups)
+    const contact = await Contact.findByIdAndUpdate(id, {...req.body, groups});  
+    console.log(contact);
     res.redirect(`/contacts/${id}`);
 }
 

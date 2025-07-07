@@ -6,7 +6,7 @@
         </header>
         <div class="flash on">New Group Added</div>
         <section class="info-card">
-            <form id="add-form">
+            <form id="add-form" method="post" action="/contacts">
                 <div class="form-field info">
                     <label for="firstName">First Name</label>
                     <input type="text" name="firstName" id="firstName">
@@ -28,7 +28,7 @@
                     <div class="group-tags">
                         <% for (let group of groups) { %>
                             <div class="tag">
-                                <label for="<%= group.name %>"><input type="checkbox" id="<%= group.name %>"><%= group.name %></label>
+                                <label for="<%= group.name %>"><input type="checkbox" name="groups" id="<%= group.name %>" value="<%=group._id %>"><%= group.name %></label>
                             </div>
                         <% } %>
                     </div>
