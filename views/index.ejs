@@ -9,7 +9,9 @@
                 </select>
             </form>
         </header>
-        <div class="flash on">New Contact Added</div>
+        <div class="flash <%= flashClass %>">
+            <%= flashMsg %>
+        </div>
         <section>
              <% for (let contact of contacts) { %> 
                 <div class="name-wrapper list not-selected">

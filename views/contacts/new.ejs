@@ -4,7 +4,9 @@
                 <h1>Add Contact</h>
             </div>
         </header>
-        <div class="flash on">New Group Added</div>
+        <div class="flash <%= flashClass %>">
+            <%= flashMsg %>
+        </div>
         <section class="info-card">
             <form id="add-form" method="post" action="/contacts">
                 <div class="form-field info">

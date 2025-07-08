@@ -4,6 +4,7 @@ const Group = require('../models/groups');
 module.exports.index = async (req, res, next) => {
     const contacts =  await Contact.find({});
     const groups =  await Group.find({});
+    const messages = req.flash()
     res.render('index', { contacts, groups });
 }
 
@@ -21,6 +22,7 @@ module.exports.submitCreateNew = async (req, res, next) => {
     if (!Array.isArray(groups)) { groups = [groups]}
     contact.groups = groups;
     await contact.save();
+    req.flash('success', "New contact created.");
     res.redirect('/contacts');
 }
 
@@ -41,14 +43,18 @@ module.exports.submitEdit = async (req, res, next) => {
     if (!Array.isArray(groups)) { req.body.groups = [groups]}
     console.log("Groups in body after: ",  groups)
     const contact = await Contact.findByIdAndUpdate(id, {...req.body, groups});  
-    console.log(contact);
+    req.flash('success', "Contact Updated.");
     res.redirect(`/contacts/${id}`);
 }
 
 module.exports.renderDetails = async(req, res, next) => {
     const { id } = req.params;
     const contact = await Contact.findById(id).populate('groups');
-    res.render('contacts/show', {contact});
+    if (!contact) {
+        req.flash('error', 'Cannot find that contact');
+        return res.redirect('/contacts');
+    }
+    res.render('contacts/show', {contact, messages: req.flash('success')});
 }
 
 module.exports.submitDelete = (req, res) => {

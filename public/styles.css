@@ -121,16 +121,20 @@ select {
 .flash {
     font-size: .67rem;
     font-weight: 300;
-    padding: 0 8px;
+    padding: 2px 8px;
     margin-bottom: 8px;
     line-height: 2;
-    background-color: rgba(91, 247, 74, 0.25);
+    background-color: white;
     height: 20px;
     width: 385px;
 }
 
-.on {
+.flash.success {
     background-color: rgba(91, 247, 74, 0.25);
+}
+
+.flash.error {
+    background-color: rgba(247, 74, 74, 0.25);
 }
 
 /* styles for contact list */
@@ -145,10 +149,6 @@ select {
     flex-direction: row;
     align-items: center;
 }
-
-/* .not-selected {
-    border: 1px solid rgba(241, 242, 244, 1);
-} */
 
 
 .groups {

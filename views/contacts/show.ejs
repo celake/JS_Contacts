@@ -6,7 +6,9 @@
     </div>
     <a class="small-link" href="/contacts/<%= contact._id %>/edit">edit </phone></a>
 </header>
-<div class="flash on">New Group Added</div>
+<div class="flash <%= flashClass %>">
+    <%= flashMsg %>
+</div>
 <section class="info-card">
     <div class="info"><div>Email</div><a class="info-link" href="mailto:charlake@yahoo.com"><%= contact.email %></a></div>
     <div class="info"><div>Phone</div><a class="info-link" href="15553331212"><%= contact.phone %></a></div>
