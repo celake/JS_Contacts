@@ -1,5 +1,6 @@
 const Contact = require('../models/contacts');
 const Group = require('../models/groups');
+const { body, validationResult } = require('express-validator');
 
 module.exports.index = async (req, res, next) => {
     const contacts =  await Contact.find({});
@@ -16,6 +17,13 @@ module.exports.renderCreateNew = async(req, res, ) => {
 }
 
 module.exports.submitCreateNew = async (req, res, next) => {
+    const errors = validationResult(req).array({ onlyFirstError: true });
+    const firstError = errors.length > 0 ? errors[0] : null;
+
+    if (firstError) {
+        req.flash('error', firstError.msg);
+        return res.redirect('/contacts/new');
+    }
     const contact = new Contact(req.body);
     let { groups } = req.body;
     if (!groups) { groups = [] }
@@ -37,11 +45,17 @@ module.exports.renderEdit = async (req, res, next) => {
 
 module.exports.submitEdit = async (req, res, next) => {
     const {id} = req.params;
+    const errors = validationResult(req).array({ onlyFirstError: true });
+    const firstError = errors.length > 0 ? errors[0] : null;
+
+    if (firstError) {
+        req.flash('error', firstError.msg);
+        return res.redirect(`/contacts/${id}/edit`);
+    }
+
     let  {groups} = req.body;
-    console.log("Groups in body before: ",  req.body.groups)
     if (!groups) { groups = [] }
     if (!Array.isArray(groups)) { req.body.groups = [groups]}
-    console.log("Groups in body after: ",  groups)
     const contact = await Contact.findByIdAndUpdate(id, {...req.body, groups});  
     req.flash('success', "Contact Updated.");
     res.redirect(`/contacts/${id}`);

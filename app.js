@@ -11,8 +11,6 @@ const Contact = require('./models/contacts');
 const Group = require('./models/groups');
 
 
-// const session = require('express-session');
-
 //import routes
 const contactRoutes = require('./routes/contacts');
 const groupRoutes = require('./routes/groups');
