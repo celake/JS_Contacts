@@ -11,26 +11,29 @@
             <form id="add-form" method="post" action="/contacts">
                 <div class="form-field info">
                     <label for="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName">
+                    <input type="text" name="firstName" id="firstName" value="<%= contact.firstName || "" %>">
                 </div>
                 <div class="form-field info">
                     <label for="lastName">Last Name</label>
-                    <input type="text" name="lastName" id="lastName">
+                    <input type="text" name="lastName" id="lastName" value="<%= contact.lastName || "" %>">
                 </div>
                 <div class="form-field info">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email">
+                    <input type="email" name="email" id="email" value="<%= contact.email || "" %>">
                 </div>
                 <div class="form-field info">
                     <label for="phone">Phone</label>
-                    <input type="tel" name="phone" id="phone">
+                    <input type="tel" name="phone" id="phone" value="<%= contact.phone || "" %>">
                 </div>
                 <div class="groups">
                     <div class="group-title info"><span>Groups</span><a class="small-link" href="/groups?returnTo=<%= returnTo %>">Create New Group</a></div>
                     <div class="group-tags">
                         <% for (let group of groups) { %>
                             <div class="tag">
-                                <label for="<%= group.name %>"><input type="checkbox" name="groups" id="<%= group.name %>" value="<%=group._id %>"><%= group.name %></label>
+                                <label for="<%= group.name %>">
+                                    <input type="checkbox" id="<%= group.name %>" name="groups" value="<%= group._id %>" <% if (names.includes(group.name)) { %> checked <% }%>>
+                                    <%= group.name %>
+                                </label>
                             </div>
                         <% } %>
                     </div>

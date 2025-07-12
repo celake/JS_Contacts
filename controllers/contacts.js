@@ -1,5 +1,6 @@
 const Contact = require('../models/contacts');
 const Group = require('../models/groups');
+const { extractGroupNames, normalizeGroups } = require('../utils/formHelpers');
 const { body, validationResult } = require('express-validator');
 
 module.exports.index = async (req, res, next) => {
@@ -13,22 +14,38 @@ module.exports.renderCreateNew = async(req, res, ) => {
     const currentUrl = req.url;
     const returnTo = `contacts/new`
     const groups =  await Group.find({});
-    res.render('contacts/new', { groups, currentUrl, returnTo});
+    const contact = {};
+    res.render('contacts/new', { groups, currentUrl, returnTo, contact, names: []});
 }
 
 module.exports.submitCreateNew = async (req, res, next) => {
     const errors = validationResult(req).array({ onlyFirstError: true });
     const firstError = errors.length > 0 ? errors[0] : null;
-
+    const returnTo = `contacts/new`
+    
     if (firstError) {
-        req.flash('error', firstError.msg);
-        return res.redirect('/contacts/new');
+        const flashMsg = firstError.msg;
+        const flashClass = 'error';
+        const contact = req.body;
+        const groups =  await Group.find({});
+        const names = extractGroupNames(contact.groups, groups);
+
+        return res.render('contacts/new', { 
+            contact, 
+            groups, 
+            returnTo, 
+            flashMsg,
+            flashClass, 
+            names 
+        });
     }
+
     const contact = new Contact(req.body);
+
+    // make certain that groups is always an array
     let { groups } = req.body;
-    if (!groups) { groups = [] }
-    if (!Array.isArray(groups)) { groups = [groups]}
-    contact.groups = groups;
+    contact.groups = normalizeGroups(groups);
+
     await contact.save();
     req.flash('success', "New contact created.");
     res.redirect('/contacts');
@@ -49,13 +66,26 @@ module.exports.submitEdit = async (req, res, next) => {
     const firstError = errors.length > 0 ? errors[0] : null;
 
     if (firstError) {
-        req.flash('error', firstError.msg);
-        return res.redirect(`/contacts/${id}/edit`);
+        const flashMsg = firstError.msg;
+        const flashClass = 'error'
+ 
+        const contact = { ...req.body, _id: id };
+        const groups =  await Group.find({});
+        const names = extractGroupNames(contact, groups);
+
+        return res.render(`contacts/edit`, { 
+            contact, 
+            groups, 
+            returnTo: `/contacts/${id}`, 
+            flashMsg,
+            flashClass, 
+            names 
+        });
     }
 
     let  {groups} = req.body;
-    if (!groups) { groups = [] }
-    if (!Array.isArray(groups)) { req.body.groups = [groups]}
+    req.body.groups = normalizeGroups(groups)
+
     const contact = await Contact.findByIdAndUpdate(id, {...req.body, groups});  
     req.flash('success', "Contact Updated.");
     res.redirect(`/contacts/${id}`);

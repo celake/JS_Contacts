@@ -4,7 +4,8 @@
   "description": "A streamlined contact management application featuring a Node.js and Express.js backend, designed with RESTful API architecture. It supports full CRUD operations and utilizes a MongoDB database for efficient data storage. The frontend is built with Vanilla JavaScript for a fast, responsive user experience.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

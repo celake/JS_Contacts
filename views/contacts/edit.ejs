@@ -8,7 +8,7 @@
             <%= flashMsg %>
         </div>
         <section class="info-card">
-            <form id="edit-form" method="post" action="/contacts/<%=contact._id%>?_method=PUT" >
+            <form id="edit-form" method="post" action="/contacts/<%= contact._id %>?_method=PUT" >
                 <div class="form-field info">
                     <label for="firstName">First Name</label>
                     <input type="text" name="firstName" id="firstName" value="<%= contact.firstName %>">

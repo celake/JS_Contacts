@@ -1,7 +1,5 @@
-//select the group-tags
-// add event listen for click
-    // find label that was clicked
-    // add class 'checked' to that label
+
+// set styling for 'groups' checkboxes that have been checked. 
 
 const tags = document.querySelectorAll('.tag');
 
