@@ -1,7 +1,10 @@
 <% layout('layouts/boilerplate.ejs') %>
 <header>
-            <div class="name-wrapper">
-                <h1>Edit Contact</h>
+            <div class="edit-wrapper">
+                <h1>Edit Contact</h1>
+                <form method="POST" action="/contacts/<%= contact._id %>?_method=delete">
+                    <button class="btn delete">delete</button>
+                </form>
             </div>
         </header>
         <div class="flash <%= flashClass %>">

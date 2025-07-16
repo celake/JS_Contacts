@@ -101,6 +101,8 @@ module.exports.renderDetails = async(req, res, next) => {
     res.render('contacts/show', {contact, messages: req.flash('success')});
 }
 
-module.exports.submitDelete = (req, res) => {
-    res.send("Delete Contact!");
+module.exports.submitDelete = async (req, res) => {
+    const { id } = req.params;
+    await Contact.findByIdAndDelete(id);
+    res.redirect('/contacts');
 }
