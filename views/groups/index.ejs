@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate.ejs') %>
 <header>
            <div class="name-wrapper">
-                <h1 class="contact-name">Edit Group</h1>
+                <h1 class="contact-name">Manage Groups</h1>
             </div>
         </header>
         <div class="flash <%= flashClass %>">
@@ -14,11 +14,11 @@
                     <input type="text" name="group" id="group">
                 </div>
                 <div class="groups">
-                <div class="group-title info"><span>Groups</span></div>
+                <div class="group-title info"><span>Groups</span> <span>select gropus to delete</span></div>
                     <div class="group-tags">
                         <% for (let group of groups) { %>
                             <div class="tag">
-                                <label for="<%= group.name %>"><input type="checkbox" name="group-name" id="<%= group.name %>" value="<%= group.name %>"><%= group.name %></label>
+                                <label for="<%= group.name %>"><input type="checkbox" name="groupName" id="<%= group.name %>" value="<%= group._id %>"><%= group.name %></label>
                             </div>
                         <% } %>
                 </div>
