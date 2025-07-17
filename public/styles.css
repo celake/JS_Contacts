@@ -127,6 +127,10 @@ select {
     font-size: .67rem
 }
 
+.small-link:hover {
+    color: rgb(132, 132, 132);
+}
+
 .flash {
     font-size: .67rem;
     font-weight: 300;
@@ -194,6 +198,10 @@ select {
     border-radius: 6px;
 }
 
+.btn:hover {
+    background-color: bisque;
+}
+
 .rt {
     display: flex;
     justify-content: end;
@@ -254,4 +262,6 @@ input[type='checkbox'] {
 .delete {
     background-color: rgba(253, 199, 197, .24);
 }
+
+
 
