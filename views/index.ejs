@@ -1,27 +1,28 @@
 <% layout('layouts/boilerplate.ejs') %>
 <header class="rt">
-            <form>
-                <select>
-                    <option>All</option>
-                    <% for (let group of groups) { %>
-                        <option><%= group.name %></option>
-                    <% } %>
-                </select>
-            </form>
-        </header>
-        <div class="flash <%= flashClass %>">
-            <%= flashMsg %>
-        </div>
-        <section>
-             <% for (let contact of contacts) { %> 
-                <div class="name-wrapper list not-selected">
-                    <div class="letter"><%= contact.firstName[0].toUpperCase() %></div>
-                    <h2 class="contact-name"><a class="contact-link" href="/contacts/<%= contact._id %>"><%= contact.firstName %> <%= contact.lastName %></a></h2>
-                </div>
+    <div class="dropdown-wrapper">
+        <div class="dropdown-selected"><span>All Contacts</span><img class="toggleOn" src="/arrow.png"></div>
+        <div class="dropdown-options hidden">
+            <div class="option visible" data-value="all">All Contacts</div>
+            <% for (let group of groups) { %>
+                <div class="option" data-value="<%= group._id %>"><%= group.name %></div>
             <% } %>
-        </section>
-        <div class="rt">
-            <form action="/contacts/new">
-                <button type="submit" class="btn">Add New</button>
-            </form>  
         </div>
+    </div>
+</header>
+<div class="flash <%= flashClass %>">
+    <%= flashMsg %>
+</div>
+<section>
+        <% for (let contact of contacts) { %> 
+        <div class="name-wrapper list not-selected contact-item" data-groups="<%= contact.groups.map(g => g._id).join(',')%>">
+            <div class="letter"><%= contact.firstName[0].toUpperCase() %></div>
+            <h2 class="contact-name"><a class="contact-link" href="/contacts/<%= contact._id %>"><%= contact.firstName %> <%= contact.lastName %></a></h2>
+        </div>
+    <% } %>
+</section>
+<div class="rt">
+    <form action="/contacts/new">
+        <button type="submit" class="btn">Add New</button>
+    </form>  
+</div>

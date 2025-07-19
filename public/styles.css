@@ -88,13 +88,44 @@ a {
     text-decoration: none;
 }
 
-select {
-    color: rgba(136, 142, 165, .5);
-    width: 110px;
-    border: 1px solid rgba(136, 142, 165, .5);
-    border-radius: 6px;
-    padding: 2px;
+/* Index page dropdown styles */
+    
+.dropdown-wrapper, .dropdown-options {
+    font-size: .8rem;
+    color: #888EA5;
+    width: 120px;
+    padding: 4px;
+    border: 1px solid rgba(241, 242, 244, 1);;
+    border-radius: 5px;
+    /* position: relative; */
 }
+
+.dropdown-selected {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropdown-options {
+    position: absolute;
+    background-color: white;
+    cursor: pointer;
+}
+
+.dropdown-selected img {
+    height: 10px;
+    width: 10px;
+    opacity: .6;
+    cursor: pointer;
+}
+
+
+.option {
+    padding-bottom: 8px;
+}
+
+
+/* Index contact page styles */
 
 .letter {
     width: 24px;
@@ -122,14 +153,18 @@ select {
     color: #586a9a;
 }
 
-.small-link {
-    color: darkgray;
-    font-size: .67rem
+.list {
+    height: 24px;
+    border: 1px solid rgba(241, 242, 244, 1);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-.small-link:hover {
-    color: rgb(132, 132, 132);
-}
+/*  Flash Messages Styles */
 
 .flash {
     font-size: .67rem;
@@ -153,19 +188,7 @@ select {
     background-color: rgba(247, 74, 74, 0.25);
 }
 
-/* styles for contact list */
-
-.list {
-    height: 24px;
-    border: 1px solid rgba(241, 242, 244, 1);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    padding: 16px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
+/* Groups section styles for edit/detail and groups page */
 
 .groups {
     margin-bottom: 16px;
@@ -187,8 +210,16 @@ select {
     font-size: .75rem;
 }
 
-/* Form Styles */ 
- 
+/* site button and link styles */
+
+ .small-link {
+    color: darkgray;
+    font-size: .67rem
+}
+
+.small-link:hover {
+    color: rgb(132, 132, 132);
+}
 
 .btn {
     color: #888EA5;
@@ -206,6 +237,15 @@ select {
     display: flex;
     justify-content: end;
 }
+
+.button-section {
+    border-top: solid 1px #D9D9D9;
+    padding: 24px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Form Styles */ 
 
 .form-field {
     margin-bottom: 16px;
@@ -252,15 +292,14 @@ input[type='checkbox'] {
     display: none;
 }
 
-.button-section {
-    border-top: solid 1px #D9D9D9;
-    padding: 24px 16px;
-    display: flex;
-    justify-content: space-between;
-}
 
 .delete {
     background-color: rgba(253, 199, 197, .24);
+}
+
+
+.hidden {
+  display: none;
 }
 
 
