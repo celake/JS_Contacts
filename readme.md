@@ -8,7 +8,6 @@
 - [Tech Stack](#tech-stack)
 - [Installation and Usage](#installation-and-usage)
 - [Project Structure](#project-structure)
-- [Status](#status)
 - [License](#license)
 - [Contact](#contact)
 
@@ -30,8 +29,6 @@ Not all features are implemented yet, and the app is not fully functional.
 
 
 ## Features
-
-### Current Features
 **View Contacts**  
 Displays a list of all contacts stored in the database, with basic details such as name and group associations.
 
@@ -43,8 +40,6 @@ Provides a page for adding and viewing groups, allowing users to organize contac
 
 **Cancel Button Functionality**  
 Includes a cancel button on the group management page that dynamically returns users to the appropriate contacts form.
-
-### Planned Features
 
 **Full Contact Management (CRUD)**
 
@@ -77,11 +72,35 @@ Uses MongoDB and Mongoose to store and manage contacts and groups in a flexible,
 **Simple and Responsive UI**
 
 Built with HTML, CSS, and Vanilla JavaScript for a lightweight, accessible interface with no frontend frameworks.
+
+## API Routes Overview
+
+**Contacts**
+
+| Method | Endpoint             | Description               |
+|--------|----------------------|---------------------------|
+| GET    | /contacts            | List all contacts         |
+| GET    | /contacts/new        | Form to create a contact  |
+| POST   | /contacts            | Create a new contact      |
+| GET    | /contacts/:id        | View a specific contact   |
+| GET    | /contacts/:id/edit   | Form to edit contact      |
+| PUT    | /contacts/:id        | Update a contact          |
+| DELETE | /contacts/:id        | Delete a contact          |
+
+**Groups**
+
+| Method | Endpoint           | Description               |
+|--------|--------------------|---------------------------|
+| GET    | /groups            | View all groups           |
+| POST   | /groups            | Create a new group        |
+| DELETE | /groups/:id        | Delete a group            |
+
 ## Tech Stack
 **Frontend:**
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
+- EJS (with ejs-mate for layout templates)
 
 **Backend:**
 - Node.js
@@ -89,17 +108,47 @@ Built with HTML, CSS, and Vanilla JavaScript for a lightweight, accessible inter
 - MongoDB
 - Mongoose
 
+**Backend:**
+- express-session: session management
+- connect-flash: flash messages for success/error notifications
+- express-validator: server side validation
+- method-override: support for Patch and Delete methods via HTML forms
+- ejs-mate: enhanced EJS templating with layout support
+
 ## Installation and Usage
 **Prerequisites**
 - Node.js and npm
 - MongoDB (local or Atlas)
 
-**Steps**
-- Coming soon
+**1. Clone repository**
+```bash
+git clone https://github.com/your-username/contact-manager.git
+cd contact-manager
+```
+**2. Install Dependencies**
+```bash
+npm install
+```
+
+**3. Seed the Database**
+```bash
+node seeds/index.js
+```
+
+**4. Start the Application**
+```bash 
+npm start
+```
+or in dev mode with automatic refresh
+```bash
+npm run dev
+```
 
 **Usage**
-- Open http://localhost:3000 in your browser.
-- Use the interface to manage your contacts.
+- Navigate to [http://localhost:3000](http://localhost:3000)
+- Add, view, edit, or delete contacts
+- Create custom groups and assign contacts to them
+- Filter the contact list by group using the dropdown
 
 
 ## Project Structure
@@ -130,9 +179,15 @@ Built with HTML, CSS, and Vanilla JavaScript for a lightweight, accessible inter
 ├── server.js
 ├── app.js
 └── package.json
-
-
 ```
+## What I Learned
+
+This project was a hands-on opportunity to apply foundational skills in full-stack JavaScript development. Key takeaways include:
+	- Built an Express.js app independently without following a tutorial, reinforcing my understanding of routing, middleware, and server-side architecture.
+	- Gained familiarity with middleware tools such as express-session, connect-flash, method-override, and ejs-mate for layout templating.
+	- Learned to use technical documentation effectively, particularly for implementing express-validator for server-side form validation.
+	- Practiced writing structured documentation, including clear installation steps, feature descriptions, and API overviews.
+	- Improved version control workflow using Git and GitHub to track progress, manage changes, and structure the project repository professionally.
 
 ## License
 This project is licensed under the MIT License.
